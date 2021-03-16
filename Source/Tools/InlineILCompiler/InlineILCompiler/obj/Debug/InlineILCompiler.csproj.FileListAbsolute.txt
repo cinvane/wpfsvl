@@ -1,0 +1,13 @@
+C:\Users\lsolorzano\source\repos\cscore\Tools\InlineILCompiler\InlineILCompiler\bin\Debug\InlineILCompiler.exe.config
+C:\Users\lsolorzano\source\repos\cscore\Tools\InlineILCompiler\InlineILCompiler\bin\Debug\InlineILCompiler.exe
+C:\Users\lsolorzano\source\repos\cscore\Tools\InlineILCompiler\InlineILCompiler\bin\Debug\InlineILCompiler.pdb
+C:\Users\lsolorzano\source\repos\cscore\Tools\InlineILCompiler\InlineILCompiler\obj\Debug\InlineILCompiler.csproj.CoreCompileInputs.cache
+C:\Users\lsolorzano\source\repos\cscore\Tools\InlineILCompiler\InlineILCompiler\obj\Debug\InlineILCompiler.exe
+C:\Users\lsolorzano\source\repos\cscore\Tools\InlineILCompiler\InlineILCompiler\obj\Debug\InlineILCompiler.pdb
+C:\Users\lsolorzano\source\repos\wpfsvl\Source\Tools\InlineILCompiler\InlineILCompiler\bin\Debug\InlineILCompiler.exe.config
+C:\Users\lsolorzano\source\repos\wpfsvl\Source\Tools\InlineILCompiler\InlineILCompiler\bin\Debug\InlineILCompiler.exe
+C:\Users\lsolorzano\source\repos\wpfsvl\Source\Tools\InlineILCompiler\InlineILCompiler\bin\Debug\InlineILCompiler.pdb
+C:\Users\lsolorzano\source\repos\wpfsvl\Source\Tools\InlineILCompiler\InlineILCompiler\obj\Debug\InlineILCompiler.csproj.CoreCompileInputs.cache
+C:\Users\lsolorzano\source\repos\wpfsvl\Source\Tools\InlineILCompiler\InlineILCompiler\obj\Debug\InlineILCompiler.exe
+C:\Users\lsolorzano\source\repos\wpfsvl\Source\Tools\InlineILCompiler\InlineILCompiler\obj\Debug\InlineILCompiler.pdb
+C:\Users\lsolorzano\source\repos\wpfsvl\Source\Tools\InlineILCompiler\InlineILCompiler\obj\Debug\InlineILCompiler.csprojAssemblyReference.cache
