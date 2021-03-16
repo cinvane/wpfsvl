@@ -29,6 +29,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <DocumentationFile>bin\Debug\WPFSoundVisualizationLib.XML</DocumentationFile>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -37,6 +38,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <PropertyGroup>
     <SignAssembly>true</SignAssembly>
@@ -62,21 +64,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Album Art Display\AlbumArtDisplay.cs" />
-    <Compile Include="AudioEncoding.cs" />
     <Compile Include="Digital Clock\DigitalClock.cs" />
-    <Compile Include="Equalizer\BiQuad.cs" />
     <Compile Include="Equalizer\Equalizer.cs" />
-    <Compile Include="Equalizer\EqualizerChannelFilter.cs" />
-    <Compile Include="Equalizer\EqualizerFilter.cs" />
-    <Compile Include="Equalizer\EqualizerSounds.cs" />
-    <Compile Include="Equalizer\PeakFilter.cs" />
     <Compile Include="FFTDataSize.cs" />
-    <Compile Include="IAudioSource.cs" />
-    <Compile Include="IReadableAudioSource.cs" />
-    <Compile Include="ISampleSource.cs" />
     <Compile Include="ISoundPlayer.cs" />
-    <Compile Include="IWaveSource.cs" />
-    <Compile Include="SampleAggregatorBase.cs" />
     <Compile Include="Spectrum Analyzer\BarHeightScalingStyles.cs" />
     <Compile Include="Spectrum Analyzer\ISpectrumPlayer.cs" />
     <Compile Include="Spectrum Analyzer\SpectrumAnalyzer.cs" />
@@ -100,7 +91,6 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <Compile Include="WaveFormat.cs" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -137,7 +127,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Album Art Display\WPFSoundVisualizationLib.AlbumArtDisplay.Icon.Large.png" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

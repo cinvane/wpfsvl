@@ -6,6 +6,9 @@ using System.Windows.Controls;
 using System.Windows.Media.Imaging;
 using WPFSoundVisualizationLib;
 using System.Windows.Data;
+using CSCore.Streams.Effects;
+using EqualizerSounds = CSCore.Streams.Effects.Equalizer;
+using CSCore.SoundOut;
 
 namespace Sample_NAudio
 {
@@ -14,9 +17,16 @@ namespace Sample_NAudio
     /// </summary>
     public partial class MainWindow : Window
     {
+        private const double MaxDB = 20;
+
+        private EqualizerSounds _equalizer;
+        private ISoundOut _soundOut;
+
         public MainWindow()
+
         {
             InitializeComponent();
+
 
             NAudioEngine soundEngine = NAudioEngine.Instance;
             soundEngine.PropertyChanged += NAudioEngine_PropertyChanged;
@@ -25,7 +35,7 @@ namespace Sample_NAudio
             UIHelper.Bind(soundEngine, "CanPlay", PlayButton, Button.IsEnabledProperty);
             UIHelper.Bind(soundEngine, "CanPause", PauseButton, Button.IsEnabledProperty);
             UIHelper.Bind(soundEngine, "SelectionBegin", repeatStartTimeEdit, TimeEditor.ValueProperty, BindingMode.TwoWay);
-            UIHelper.Bind(soundEngine, "SelectionEnd", repeatStopTimeEdit, TimeEditor.ValueProperty, BindingMode.TwoWay);     
+            UIHelper.Bind(soundEngine, "SelectionEnd", repeatStopTimeEdit, TimeEditor.ValueProperty, BindingMode.TwoWay);
 
             spectrumAnalyzer.RegisterSoundPlayer(soundEngine);
             waveformTimeline.RegisterSoundPlayer(soundEngine);
@@ -77,7 +87,7 @@ namespace Sample_NAudio
                     break;
                 case "ChannelPosition":
                     clockDisplay.Time = TimeSpan.FromSeconds(engine.ChannelPosition);
-                    break;   
+                    break;
                 default:
                     // Do Nothing
                     break;
@@ -184,7 +194,7 @@ namespace Sample_NAudio
             openDialog.Filter = "(*.mp3)|*.mp3";
             if (openDialog.ShowDialog() == true)
             {
-                NAudioEngine.Instance.OpenFile(openDialog.FileName);
+                NAudioEngine.Instance.OpenFile(openDialog.FileName, ref _equalizer);
                 FileText.Text = openDialog.FileName;
             }
         }
@@ -203,5 +213,24 @@ namespace Sample_NAudio
         {
             NAudioEngine.Instance.Dispose();
         }
+
+
+
+        private void slider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+
+            var Slider = sender as Slider;
+            if (_equalizer != null && Slider != null)
+            {
+                double perc = (Slider.Value / (double)Slider.Maximum);
+                var value = (float)(perc * MaxDB);
+
+                //the tag of the Slider contains the index of the filter
+                int filterIndex = Int32.Parse((string)Slider.Tag);
+                EqualizerFilter filter = _equalizer.SampleFilters[filterIndex];
+                filter.AverageGainDB = value;
+            }
+        }
+
     }
 }

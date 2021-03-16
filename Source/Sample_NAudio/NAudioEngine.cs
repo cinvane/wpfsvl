@@ -7,8 +7,12 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Windows.Threading;
+using CSCore;
+using CSCore.Codecs;
+using CSCore.SoundOut;
 using NAudio.Wave;
 using WPFSoundVisualizationLib;
+using EqualizerSounds = CSCore.Streams.Effects.Equalizer;
 
 namespace Sample_NAudio
 {
@@ -28,7 +32,7 @@ namespace Sample_NAudio
         private double channelLength;
         private double channelPosition;
         private bool inChannelSet;
-        private WaveOut waveOutDevice;
+        private CSCore.SoundOut.WaveOut waveOutDevice;
         private WaveStream activeStream;
         private WaveChannel32 inputStream;
         private SampleAggregator sampleAggregator;
@@ -372,7 +376,7 @@ namespace Sample_NAudio
             }
         }
 
-        public void OpenFile(string path)
+        public void OpenFile(string path, ref EqualizerSounds _equalizer)
         {
             Stop();
 
@@ -389,15 +393,28 @@ namespace Sample_NAudio
             {
                 try
                 {
-                    waveOutDevice = new WaveOut()
-                    {
-                        DesiredLatency = 100
-                    };
+                    // _soundOut.Initialize(source);
+
+                    waveOutDevice = new CSCore.SoundOut.WaveOut(100);
+                    //{
+                    //    DesiredLatency = 100
+                    //};
+                    
                     ActiveStream = new Mp3FileReader(path);
                     inputStream = new WaveChannel32(ActiveStream);
                     sampleAggregator = new SampleAggregator(fftDataSize);
                     inputStream.Sample += inputStream_Sample;
-                    waveOutDevice.Init(inputStream);
+                    //// inputStream.WaveFormat 
+
+                    var source = CodecFactory.Instance.GetCodec(path)
+                        .Loop()
+                        .ChangeSampleRate(32000)
+                        .ToSampleSource()
+                        .AppendSource(EqualizerSounds.Create10BandEqualizer, out _equalizer)
+                        .ToWaveSource();
+
+                    //waveOutDevice.Init(inputStream);
+                    waveOutDevice.Initialize(source);
                     ChannelLength = inputStream.TotalTime.TotalSeconds;
                     FileTag = TagLib.File.Create(path);
                     GenerateWaveformData(path);
